@@ -15,9 +15,11 @@ players_height = 90
 #Coordinates player 1 
 player_1_x = 50 
 player_1_y = 300 - (players_height/2)
+player_1_y_speed = 0
 #coordinates player 2
 player_2_x = 750 - players_width
 player_2_y = player_1_y
+player_2_y_speed = 0
 #coordinates ball
 ball_x = 400
 ball_y = 300
@@ -37,6 +39,34 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        #player key controls
+        #checks for KEYDOWN event
+        if event.type == pygame.KEYDOWN :
+            #Player 1
+            if event.key == pygame.K_w :
+                player_1_y_speed = -1
+            if event.key == pygame.K_s :
+                player_1_y_speed = 1
+            #Player 2
+            if event.key == pygame.K_UP :
+                player_2_y_speed = -1
+            if event.key == pygame.K_DOWN :
+                player_2_y_speed = 1
+        if event.type == pygame.KEYUP : 
+             #Player 1
+            if event.key == pygame.K_w :
+                player_1_y_speed = 0
+            if event.key == pygame.K_s :
+                player_1_y_speed = 0
+            #Player 2
+            if event.key == pygame.K_UP :
+                player_2_y_speed = 0
+            if event.key == pygame.K_DOWN :
+                player_2_y_speed = 0
+        
+    #players movement
+    player_1_y += player_1_y_speed
+    player_2_y += player_2_y_speed
     #fill the screen with color
     screen.fill(white)
     #Drawing area 
