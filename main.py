@@ -1,4 +1,5 @@
 #Import
+from locale import strcoll
 from turtle import speed
 import pygame
 import random as rd
@@ -37,6 +38,25 @@ pygame.display.set_caption('Pong game')
 #icon
 icon = pygame.image.load('PIN PONG.png')
 pygame.display.set_icon(icon)
+#Score var
+player_1_score = 0
+player_2_score = 0
+#Score font 
+score_font = pygame.font.Font('MagicalStory.ttf', 35) 
+#Score position in thr screen player 1 
+player_1_score_x = 15
+player_1_score_y = 10
+#Score position in thr screen player 2 
+player_2_score_x = 650
+player_2_score_y = 10
+#player 1 score function
+def show_1_score(x, y):
+    score1 = score_font.render('Player 1:' + str(player_1_score), True, (0,0,0))
+    screen.blit(score1, (x,y))
+#player 2 score function
+def show_2_score(x, y):
+    score2 = score_font.render('Player 2:' + str(player_2_score), True, (0,0,0))
+    screen.blit(score2, (x,y))
 #game loop
 running = True
 while running: 
@@ -90,15 +110,16 @@ while running:
         ball_speed_y *= -1
     #rigth or left and score update
     if ball_x > screen_width :
+        player_1_score += 1 
         ball_x = screen_width/2
         ball_y = screen_width/2
         ball_speed_x *= rd.choice([-1, 1]) 
     elif ball_x < 0 :
+        player_2_score += 1 
         ball_x = screen_width/2
         ball_y = screen_width/2
         ball_speed_x *= rd.choice([-1, 1]) 
 
-      
     #fill the screen with color
     screen.fill(white)
     #Drawing area 
@@ -112,6 +133,10 @@ while running:
     #Colitions 
     if ball.colliderect(player_1) or ball.colliderect(player_2):
         ball_speed_x *= -1
+    #call the score 1 function 
+    show_1_score(player_1_score_x, player_1_score_y)
+    #call the score 2 function 
+    show_2_score(player_2_score_x, player_2_score_y)
     # Refresh the windows
     pygame.display.flip()
     
