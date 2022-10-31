@@ -43,6 +43,8 @@ player_1_score = 0
 player_2_score = 0
 #Score font 
 score_font = pygame.font.Font('MagicalStory.ttf', 35) 
+#Score font 
+looser_font = pygame.font.Font('Milky Honey.ttf', 35) 
 #Score position in thr screen player 1 
 player_1_score_x = 15
 player_1_score_y = 10
@@ -133,10 +135,27 @@ while running:
     #Colitions 
     if ball.colliderect(player_1) or ball.colliderect(player_2):
         ball_speed_x *= -1
+    #End game 
+    if player_1_score == 20 :
+     ball_y = 2000
+     ball_speed_x = 0
+     ball_speed_y = 0
+     player_1_y_speed = 0
+     player_2_y_speed = 0
+     looser_text = looser_font.render('HAHAHA you loose player 2', True, (0,0,0))
+     screen.blit(looser_text, (200, 250))
+    if player_2_score == 20 : 
+     ball_y = 2000
+     ball_speed_x = 0
+     ball_speed_y = 0
+     player_1_y_speed = 0
+     player_2_y_speed = 0
+     looser_text = looser_font.render('HAHAHA you loose player 1', True, (0,0,0))
+     screen.blit(looser_text, (200, 250))
     #call the score 1 function 
     show_1_score(player_1_score_x, player_1_score_y)
     #call the score 2 function 
     show_2_score(player_2_score_x, player_2_score_y)
     # Refresh the windows
-    pygame.display.flip()
+    pygame.display.flip() 
     
