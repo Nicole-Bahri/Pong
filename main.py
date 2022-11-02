@@ -3,12 +3,17 @@ from locale import strcoll
 from turtle import speed
 import pygame
 import random as rd
+from pygame import mixer
 pygame.init()
 #Colors
 white = (255, 255, 255) 
 color_player = (41,	134,204)
 color_ball = (241,194,50)
 color_line = (0, 0, 0)
+#Background music
+mixer.music.load('background.wav')
+mixer.music.play(-1)
+mixer.music.set_volume(0.6)
 #window size
 screen_width = 800
 screen_height = 600
@@ -135,6 +140,9 @@ while running:
     #Colitions 
     if ball.colliderect(player_1) or ball.colliderect(player_2):
         ball_speed_x *= -1
+        ball_sound = mixer.Sound('decidemp3-14575.wav')
+        ball_sound.play()
+        ball_sound.set_volume(0.3)
     #End game 
     if player_1_score == 20 :
      ball_y = 2000
